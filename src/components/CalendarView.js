@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -17,7 +18,7 @@ function CalendarView(props) {
       </Row>
       {props.time.map(hour => (
         <Row className="Grid-row">
-          <Col className="Time-col">{hour}</Col>
+          <Col className="Time-col">{moment(hour,'HH').format('hh:mm a')}</Col>
           {props.days.map(day => (
             <Col className="Grid-col"></Col>
           ))}

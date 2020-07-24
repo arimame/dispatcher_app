@@ -2,41 +2,44 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Header {
+  padding: 20px;
+  font-family: 'Bebas Neue', cursive;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Driver-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.Calendar-header p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.Calendar-container {
+  border-bottom: 1px solid black;
+}
+
+.Days-header {
+  padding: 5px;
+  background-color: black;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Grid-row {
+  border-top: 1px solid black;
 }
 
-.Black-border {
-  border: 1px solid black;
+.Time-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Grid-col {
+  height: 60px;
+  border-right: 1px solid black;
 }

@@ -7,12 +7,19 @@ function CalendarView(props) {
 
   return (
     <div>
-    <Container>
+    <Container className="Calendar-container">
+      <Row className="Days-header">
+        <Col>
+        </Col>
+        {props.days.map(day => (
+          <Col>{day}</Col>
+        ))}
+      </Row>
       {props.time.map(hour => (
-        <Row className="Black-border">
-          <Col className="Black-border" style={{height: 50}}>{hour}</Col>
+        <Row className="Grid-row">
+          <Col className="Time-col">{hour}</Col>
           {props.days.map(day => (
-            <Col className="Black-border"></Col>
+            <Col className="Grid-col"></Col>
           ))}
         </Row>
       ))}

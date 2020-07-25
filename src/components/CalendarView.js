@@ -14,14 +14,14 @@ function CalendarView(props) {
         <Col>
         </Col>
         {props.days.map(day => (
-          <Col>{day}</Col>
+          <Col key={day}>{day}</Col>
         ))}
       </Row>
       {props.time.map(hour => (
-        <Row className="Grid-row">
-          <Col className="Time-col">{moment(hour,'HH').format('hh:mm a')}</Col>
+        <Row className="Grid-row" key={hour}>
+          <Col className="Time-col" key={hour}>{moment(hour,'HH').format('hh:mm a')}</Col>
           {props.days.map(day => (
-            <Col className="Grid-col" onClick={() => props.addTask(day, hour)}>
+            <Col className="Grid-col" key={day} onClick={() => props.addTask(day, hour)}>
             {props.weekData[day].tasks.map(task =>
               task.start === hour ? (<Task task={task}/>) : (null))}
             </Col>

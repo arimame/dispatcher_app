@@ -20,7 +20,7 @@ function CalendarView(props) {
         <Row className="Grid-row">
           <Col className="Time-col">{moment(hour,'HH').format('hh:mm a')}</Col>
           {props.days.map(day => (
-            <Col className="Grid-col"></Col>
+            <Col className="Grid-col" onClick={() => props.addTask(day, hour)}></Col>
           ))}
         </Row>
       ))}

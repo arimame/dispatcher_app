@@ -44,15 +44,8 @@ function App() {
     setWeek(forward);
   };
 
-  const addTask = (day, hour) => {
+  const addTask = (task, day) => {
     //updated tasks array
-    const task = {
-      type: "pick up",
-      location: "123 Fake Street",
-      description: "this is a comment",
-      start: hour,
-      end: hour + 2
-    }
     const tasks = calendars[selectedDriver][week][day].tasks;
     tasks.push(task);
 

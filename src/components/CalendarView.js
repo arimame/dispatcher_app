@@ -4,31 +4,51 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Task from './Task.js';
+import TaskForm from './TaskForm.js';
 
 function CalendarView(props) {
+  const [formProps, setFormProps] = React.useState({
+    modalShow: false,
+    day: "",
+    hour: ""
+  });
+
+  const launchTaskFormModal = (day, hour) => {
+    setFormProps({
+      modalShow: true,
+      day: day,
+      hour: hour
+    })
+  }
 
   return (
     <div>
-    <Container className="Calendar-container">
-      <Row className="Days-header">
-        <Col>
-        </Col>
-        {props.days.map(day => (
-          <Col key={day}>{day}</Col>
-        ))}
-      </Row>
-      {props.time.map(hour => (
-        <Row className="Grid-row" key={hour}>
-          <Col className="Time-col" key={hour}>{moment(hour,'HH').format('hh:mm a')}</Col>
+      <Container className="Calendar-container">
+        <Row className="Days-header">
+          <Col>
+          </Col>
           {props.days.map(day => (
-            <Col className="Grid-col" key={day} onClick={() => props.addTask(day, hour)}>
-            {props.weekData[day].tasks.map(task =>
-              task.start === hour ? (<Task task={task}/>) : (null))}
-            </Col>
+            <Col key={day}>{day}</Col>
           ))}
         </Row>
-      ))}
-    </Container>
+        {props.time.map(hour => (
+          <Row className="Grid-row" key={hour}>
+            <Col className="Time-col" key={hour}>{moment(hour,'HH').format('hh:mm a')}</Col>
+            {props.days.map(day => (
+              <Col className="Grid-col" key={day} onClick={() =>launchTaskFormModal(day, hour)}>
+              {props.weekData[day].tasks.map(task =>
+                task.start === hour ? (<Task task={task}/>) : (null))}
+              </Col>
+            ))}
+          </Row>
+        ))}
+      </Container>
+      <TaskForm
+          day={formProps.day}
+          time={formProps.hour}
+          show={formProps.modalShow}
+          onHide={() => setFormProps({...formProps, modalShow: false})}
+      />
     </div>
   );
 }

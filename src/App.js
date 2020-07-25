@@ -28,6 +28,8 @@ function App() {
     3: calendar3
   });
 
+  const weekData = calendars[selectedDriver][week]
+
   //events
   const driverChanged = (event) => {
     setSelectedDriver(event.target.value);
@@ -50,7 +52,7 @@ function App() {
       location: "123 Fake Street",
       description: "this is a comment",
       start: hour,
-      end: hour + 1
+      end: hour + 2
     }
     const tasks = calendars[selectedDriver][week][day].tasks;
     tasks.push(task);
@@ -74,7 +76,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-      <CalendarView days={days} time={time} addTask={addTask}/>
+      <CalendarView days={days} time={time} weekData={weekData} addTask={addTask}/>
     </div>
   );
 }

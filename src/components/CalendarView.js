@@ -3,6 +3,7 @@ import moment from 'moment'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Task from './Task.js';
 
 function CalendarView(props) {
 
@@ -20,7 +21,10 @@ function CalendarView(props) {
         <Row className="Grid-row">
           <Col className="Time-col">{moment(hour,'HH').format('hh:mm a')}</Col>
           {props.days.map(day => (
-            <Col className="Grid-col" onClick={() => props.addTask(day, hour)}></Col>
+            <Col className="Grid-col" onClick={() => props.addTask(day, hour)}>
+            {props.weekData[day].tasks.map(task =>
+              task.start === hour ? (<Task task={task}/>) : (null))}
+            </Col>
           ))}
         </Row>
       ))}

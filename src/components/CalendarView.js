@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Task from './Task.js';
-import TaskForm from './TaskForm.js';
+import TaskModal from './TaskModal.js';
 
 function CalendarView(props) {
   const [formProps, setFormProps] = React.useState({
@@ -37,18 +37,13 @@ function CalendarView(props) {
             {props.days.map(day => (
               <Col className="Grid-col" key={day} onClick={() =>launchTaskFormModal(day, hour)}>
               {props.weekData[day].tasks.map(task =>
-                task.start === hour ? (<Task task={task}/>) : (null))}
+                task.start === hour ? (<Task key={task} task={task}/>) : (null))}
               </Col>
             ))}
           </Row>
         ))}
       </Container>
-      <TaskForm
-          day={formProps.day}
-          time={formProps.hour}
-          show={formProps.modalShow}
-          onHide={() => setFormProps({...formProps, modalShow: false})}
-      />
+      <TaskModal day={formProps.day} time={formProps.hour} show={formProps.modalShow} save={props.addTask} onHide={() => setFormProps({...formProps, modalShow: false})}/>
     </div>
   );
 }

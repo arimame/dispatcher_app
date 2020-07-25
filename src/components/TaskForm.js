@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment'
-import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row'
@@ -17,73 +16,55 @@ function TaskForm(props) {
     end: 0
   })
 
-  console.log(taskInputs)
-
   React.useEffect(() => {
     setTaskInputs({...taskInputs, start: props.time, end: props.time + 1});
     // eslint-disable-next-line
   }, [props.time])
 
   return (
-    <Modal
-      {...props}
-      size="m"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add Task
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Group controlId="type">
-            <Form.Label>Task Type</Form.Label>
-            <Form.Control as="select" value={taskInputs.type} onChange={(event) => setTaskInputs({...taskInputs, type: event.target.value})}>
-              <option value="pickup">Pick Up</option>
-              <option value="dropoff">Drop Off</option>
-              <option value="other">Other</option>
-            </Form.Control>
-          </Form.Group>
-          <Row>
-            <Col>
-              <Form.Group controlId="start">
-                <Form.Label>Start Time</Form.Label>
-                <Form.Control as="select" value={taskInputs.start} onChange={(event) => setTaskInputs({...taskInputs, start: Number(event.target.value)})}>
-                  {time.map(hour => (
-                    <option value={hour} key={hour}>{moment(hour,'HH').format('hh:mm a')}</option>
-                  ))}
-                </Form.Control>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="end">
-                <Form.Label>End Time</Form.Label>
-                <Form.Control as="select" value={taskInputs.end} onChange={(event) => setTaskInputs({...taskInputs, end: Number(event.target.value)})}>
+      <Form>
+        <Form.Group controlId="type">
+          <Form.Label>Task Type</Form.Label>
+          <Form.Control as="select" value={taskInputs.type} onChange={(event) => setTaskInputs({...taskInputs, type: event.target.value})}>
+            <option value="pickup">Pick Up</option>
+            <option value="dropoff">Drop Off</option>
+            <option value="other">Other</option>
+          </Form.Control>
+        </Form.Group>
+        <Row>
+          <Col>
+            <Form.Group controlId="start">
+              <Form.Label>Start Time</Form.Label>
+              <Form.Control as="select" value={taskInputs.start} onChange={(event) => setTaskInputs({...taskInputs, start: Number(event.target.value)})}>
                 {time.map(hour => (
                   <option value={hour} key={hour}>{moment(hour,'HH').format('hh:mm a')}</option>
                 ))}
-                </Form.Control>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Form.Group controlId="location">
-            <Form.Label>Location</Form.Label>
-            <Form.Control type="location" value={taskInputs.location} onChange={(event) => setTaskInputs({...taskInputs, location: event.target.value})}/>
-          </Form.Group>
-          <Form.Group controlId="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="description" value={taskInputs.description} onChange={(event) => setTaskInputs({...taskInputs, description: event.target.value})}/>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="end">
+              <Form.Label>End Time</Form.Label>
+              <Form.Control as="select" value={taskInputs.end} onChange={(event) => setTaskInputs({...taskInputs, end: Number(event.target.value)})}>
+              {time.map(hour => (
+                <option value={hour} key={hour}>{moment(hour,'HH').format('hh:mm a')}</option>
+              ))}
+              </Form.Control>
+            </Form.Group>
+          </Col>
+        </Row>
+        <Form.Group controlId="location">
+          <Form.Label>Location</Form.Label>
+          <Form.Control type="location" value={taskInputs.location} onChange={(event) => setTaskInputs({...taskInputs, location: event.target.value})}/>
+        </Form.Group>
+        <Form.Group controlId="description">
+          <Form.Label>Description</Form.Label>
+          <Form.Control type="description" value={taskInputs.description} onChange={(event) => setTaskInputs({...taskInputs, description: event.target.value})}/>
+        </Form.Group>
+        <Button variant="primary" onClick={() => props.save(taskInputs, props.day)}>
+          Submit
+        </Button>
+      </Form>
   );
 }
 

@@ -6,7 +6,7 @@ function ErrorModal(props) {
 
   return (
     <Modal
-      show={props.show}
+      show={props.modalShow}
       onHide={props.onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"

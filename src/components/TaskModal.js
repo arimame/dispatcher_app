@@ -47,7 +47,7 @@ function TaskModal(props) {
   return (
     <div>
     <Modal
-      show={props.show}
+      show={props.modalShow}
       onHide={props.onHide}
       size="m"
       aria-labelledby="contained-modal-title-vcenter"
@@ -58,13 +58,13 @@ function TaskModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <TaskForm day={props.day} time={props.time} validateForm={validateForm}/>
+        <TaskForm day={props.day} time={props.hour} validateForm={validateForm}/>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
-    <ErrorModal show={error.modalShow} message={error.message} onHide={() => setError({...error, modalShow: false})}/>
+    <ErrorModal {...error} onHide={() => setError({...error, modalShow: false})}/>
     </div>
   );
 }

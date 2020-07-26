@@ -43,7 +43,7 @@ function CalendarView(props) {
           </Row>
         ))}
       </Container>
-      <TaskModal day={formProps.day} time={formProps.hour} show={formProps.modalShow} save={props.addTask} onHide={() => setFormProps({...formProps, modalShow: false})}/>
+      <TaskModal day={formProps.day} time={formProps.hour} show={formProps.modalShow} addTask={props.addTask} onHide={() => setFormProps({...formProps, modalShow: false})}/>
     </div>
   );
 }

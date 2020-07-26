@@ -3,6 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import TaskForm from './TaskForm.js';
 import ErrorModal from './ErrorModal.js';
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
+
+const moment = extendMoment(Moment);
 
 function TaskModal(props) {
    const [error, setError] = React.useState({
@@ -10,7 +14,7 @@ function TaskModal(props) {
      message: ""
    });
 
-  const validateForm = (task, day) => {
+   const validateForm = (task, day) => {
     if(task.start === 24) {
       task.start = 0;
     }
@@ -20,10 +24,26 @@ function TaskModal(props) {
     if(task.start >= task.end) {
       setError({modalShow: true, message: "End time must be after start time"});
     } else {
-      props.addTask(task, day);
-      props.onHide();
+      let overlap = false;
+
+      props.weekData[day].tasks.forEach((item) => {
+        debugger;
+        const range1 = moment.range(moment(task.start, 'HH:mm'), moment(task.end, 'HH:mm'));
+        const range2 = moment.range(moment(item.start, 'HH:mm'), moment(item.end, 'HH:mm'));
+        if(range1.overlaps(range2)) {
+          overlap = true;
+        }
+      });
+
+      if(overlap) {
+        setError({modalShow: true, message: "Tasks cannot overlap"});
+      } else {
+        props.addTask(task, day);
+        props.onHide();
+      }
     }
-  }
+  };
+
   return (
     <div>
     <Modal

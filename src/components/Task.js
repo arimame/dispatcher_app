@@ -2,12 +2,25 @@ import React from 'react';
 
 function Task(props) {
 
-  const taskStyle = function(start, end) {
-    const height = (end - start) * 60;
-     return {
-       backgroundColor: "#C8C6D7",
-       height: height,
-       margin: 0
+  const colors= {
+    pickup:"#2a1e5c",
+    dropoff: "#55DDE0",
+    other: "#E01A4F"
+  };
+
+  const taskStyle = function(task) {
+    const color = colors[task.type]
+    const height = (task.end - task.start) * 60;
+    return {
+      backgroundColor: color,
+      height: height,
+      margin: 0,
+      color: "white",
+      borderRadius: 10,
+      marginTop: 1,
+      paddingTop: 5,
+      position: "relative",
+      zIndex: 1
      }
  }
 

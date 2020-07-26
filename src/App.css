@@ -43,3 +43,7 @@
   height: 60px;
   border-right: 1px solid black;
 }
+
+.Grid-col:hover {
+  background-color: #F5F5F5;
+}

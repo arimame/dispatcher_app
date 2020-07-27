@@ -76,6 +76,22 @@ function App() {
     setCalendars({...calendars, [selectedDriver]: updatedCalendar})
   };
 
+  const deleteTask = (taskToRemove, day) => {
+    //clone calendar object
+    const allCalendars = cloneDeep(calendars);
+    //update tasks array with updated task
+    const tasks = allCalendars[selectedDriver][week][day].tasks;
+    tasks.forEach((task, i) => {
+      if(task.id === taskToRemove.id) {
+        tasks.splice(i, 1);
+      }
+    });
+    //copy selected calendar object and update state
+    const updatedCalendar = allCalendars[selectedDriver];
+    updatedCalendar[week][day].tasks = tasks;
+    setCalendars({...calendars, [selectedDriver]: updatedCalendar})
+  };
+
   return (
     <div className="App">
       <h1 className="Header">Dispatcher Scheduling App</h1>
@@ -89,7 +105,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-      <CalendarView days={days} time={time} weekData={weekData()} addTask={addTask} updateTask={updateTask}/>
+      <CalendarView days={days} time={time} weekData={weekData()} addTask={addTask} updateTask={updateTask} deleteTask={deleteTask}/>
     </div>
   );
 }

@@ -11,24 +11,29 @@ function TaskModal(props) {
    });
 
    const validateForm = (task, day, type) => {
-    if(task.start === 24) {
-      task.start = 0;
-    }
-    if(task.end === 0) {
-      task.end = 24;
-    }
-    if(task.start >= task.end) {
-      setError({modalShow: true, message: "End time must be after start time"});
+    if(type === "delete") {
+      props.deleteTask(task, day)
+      props.onHide();
     } else {
-      if(props.type === "update") {
-        props.updateTask(task, day);
-        props.onHide();
+      if(task.start === 24) {
+        task.start = 0;
+      }
+      if(task.end === 0) {
+        task.end = 24;
+      }
+      if(task.start >= task.end) {
+        setError({modalShow: true, message: "End time must be after start time"});
       } else {
-        if(conflictChecker(props.weekData, day, task)) {
-          setError({modalShow: true, message: "Tasks cannot overlap"});
-        } else {
-          props.addTask(task, day);
+        if(props.type === "update") {
+          props.updateTask(task, day);
           props.onHide();
+        } else {
+          if(conflictChecker(props.weekData, day, task)) {
+            setError({modalShow: true, message: "Tasks cannot overlap"});
+          } else {
+            props.addTask(task, day);
+            props.onHide();
+          }
         }
       }
     }

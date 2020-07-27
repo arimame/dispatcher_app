@@ -22,7 +22,7 @@ function ErrorModal(props) {
       <Modal.Footer>
       {props.conflict ? (
         <div>
-          <Button variant="danger" onClick={() => props.confirmOverwrite(props.newTask, props.overlappingTasks, props.day)}>Overwrite</Button>
+          <Button variant="danger" onClick={() => props.confirmOverwrite(props.newTask, props.overlappingTasks, props.day, props.type)}>Overwrite</Button>
           <Button onClick={props.onHide} style={{marginLeft: 5}}>Cancel</Button>
         </div>
       ) : (

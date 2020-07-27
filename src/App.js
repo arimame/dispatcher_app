@@ -92,7 +92,7 @@ function App() {
     setCalendars({...calendars, [selectedDriver]: updatedCalendar})
   };
 
-  const overwriteTask = (newTask, tasksToRemove, day) => {
+  const overwriteTask = (newTask, tasksToRemove, day, type) => {
     //clone calendar object
     const allCalendars = cloneDeep(calendars);
 
@@ -107,11 +107,21 @@ function App() {
     });
 
     //update task array with new task
-    const updatedTasks = [ ...tasks, newTask];
+    if(type === "add") {
+      tasks.push(newTask);
+    }
+
+    if(type === "update") {
+      tasks.forEach((task, i) => {
+        if(task.id === newTask.id) {
+          tasks[i] = newTask;
+        }
+      });
+    }
 
     //copy selected calendar object and update state
     const updatedCalendar = allCalendars[selectedDriver];
-    updatedCalendar[week][day].tasks = updatedTasks;
+    updatedCalendar[week][day].tasks = tasks
     setCalendars({...calendars, [selectedDriver]: updatedCalendar})
   };
 

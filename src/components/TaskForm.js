@@ -82,7 +82,7 @@ function TaskForm(props) {
           ) : (
           <div>
             <Button variant="primary" onClick={() => props.validateForm(taskInputs, props.day, props.type)}>Update</Button>
-            <Button variant="danger" style={{marginLeft: 5}} onClick={() => props.validateForm(taskInputs, props.day, "delete")}>Delete</Button>
+            <Button variant="danger" style={{marginLeft: 5}} onClick={() => props.confirmDelete(taskInputs, props.day)}>Delete</Button>
           </div>
         )}
       </Form>

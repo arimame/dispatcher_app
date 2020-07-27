@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import TaskForm from './TaskForm.js';
 import ErrorModal from './ErrorModal.js';
 import conflictChecker from '../helpers/conflictChecker.js'
@@ -11,7 +10,7 @@ function TaskModal(props) {
      message: ""
    });
 
-   const validateForm = (task, day) => {
+   const validateForm = (task, day, type) => {
     if(task.start === 24) {
       task.start = 0;
     }
@@ -21,11 +20,16 @@ function TaskModal(props) {
     if(task.start >= task.end) {
       setError({modalShow: true, message: "End time must be after start time"});
     } else {
-      if(conflictChecker(props.weekData, day, task)) {
-        setError({modalShow: true, message: "Tasks cannot overlap"});
-      } else {
-        props.addTask(task, day);
+      if(props.type === "update") {
+        props.updateTask(task, day);
         props.onHide();
+      } else {
+        if(conflictChecker(props.weekData, day, task)) {
+          setError({modalShow: true, message: "Tasks cannot overlap"});
+        } else {
+          props.addTask(task, day);
+          props.onHide();
+        }
       }
     }
   };
@@ -39,16 +43,14 @@ function TaskModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered>
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add Task
-        </Modal.Title>
+      {props.type === "add" ? (
+        <Modal.Title id="contained-modal-title-vcenter">Add Task</Modal.Title>) : (
+        <Modal.Title id="contained-modal-title-vcenter">Update Task</Modal.Title>
+      )}
       </Modal.Header>
       <Modal.Body>
-        <TaskForm day={props.day} time={props.hour} validateForm={validateForm}/>
+        <TaskForm task={props.task} type={props.type} day={props.day} time={props.hour} validateForm={validateForm}/>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
     <ErrorModal {...error} onHide={() => setError({...error, modalShow: false})}/>
     </div>

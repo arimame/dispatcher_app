@@ -10,16 +10,30 @@ function CalendarView(props) {
   const [formProps, setFormProps] = React.useState({
     modalShow: false,
     day: "",
-    hour: ""
+    hour: "",
+    task: null,
+    type: ""
   });
 
-  const launchTaskFormModal = (day, hour) => {
+  const launchAddTaskModal = (day, hour) => {
     setFormProps({
+      ...formProps,
       modalShow: true,
       day: day,
-      hour: hour
-    })
-  }
+      hour: hour,
+      type: "add"
+    });
+  };
+
+  const launchEditTaskModal = (event, task) => {
+    event.stopPropagation()
+    setFormProps({
+      ...formProps,
+      modalShow: true,
+      task: task,
+      type: "update"
+    });
+  };
 
   return (
     <div>
@@ -35,15 +49,15 @@ function CalendarView(props) {
           <Row className="Grid-row" key={hour}>
             <Col className="Time-col" key={hour}>{moment(hour,'HH').format('hh:mm a')}</Col>
             {props.days.map(day => (
-              <Col className="Grid-col" key={day} onClick={() =>launchTaskFormModal(day, hour)}>
+              <Col className="Grid-col" key={day} onClick={() =>launchAddTaskModal(day, hour)}>
               {props.weekData[day].tasks.map(task =>
-                task.start === hour ? (<Task key={task} task={task}/>) : (null))}
+                task.start === hour ? (<Task key={task} task={task} launchEditTaskModal={launchEditTaskModal} />) : (null))}
               </Col>
             ))}
           </Row>
         ))}
       </Container>
-      <TaskModal {...formProps} addTask={props.addTask} weekData={props.weekData} onHide={() => setFormProps({...formProps, modalShow: false})}/>
+      <TaskModal {...formProps} updateTask={props.updateTask} addTask={props.addTask} weekData={props.weekData} onHide={() => setFormProps({...formProps, modalShow: false})}/>
     </div>
   );
 }

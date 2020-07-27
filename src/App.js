@@ -60,6 +60,22 @@ function App() {
     setCalendars({...calendars, [selectedDriver]: updatedCalendar})
   };
 
+  const updateTask = (updatedTask, day) => {
+    //clone calendar object
+    const allCalendars = cloneDeep(calendars);
+    //update tasks array with updated task
+    const tasks = allCalendars[selectedDriver][week][day].tasks;
+    tasks.forEach((task, i) => {
+      if(task.id === updatedTask.id) {
+        tasks[i] = updatedTask
+      }
+    });
+    //copy selected calendar object and update state
+    const updatedCalendar = allCalendars[selectedDriver];
+    updatedCalendar[week][day].tasks = tasks;
+    setCalendars({...calendars, [selectedDriver]: updatedCalendar})
+  };
+
   return (
     <div className="App">
       <h1 className="Header">Dispatcher Scheduling App</h1>

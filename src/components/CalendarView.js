@@ -57,7 +57,15 @@ function CalendarView(props) {
           </Row>
         ))}
       </Container>
-      <TaskModal {...formProps} updateTask={props.updateTask} addTask={props.addTask} deleteTask={props.deleteTask} weekData={props.weekData} onHide={() => setFormProps({...formProps, modalShow: false})}/>
+      <TaskModal
+        {...formProps}
+        updateTask={props.updateTask}
+        addTask={props.addTask}
+        deleteTask={props.deleteTask}
+        overwriteTask={props.overwriteTask}
+        weekData={props.weekData}
+        onHide={() => setFormProps({...formProps, modalShow: false})}
+      />
     </div>
   );
 }

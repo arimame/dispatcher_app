@@ -11,10 +11,13 @@ function TaskModal(props) {
    });
 
    const validateForm = (task, day, type) => {
+     //move to  own function
     if(type === "delete") {
-      props.deleteTask(task, day)
+      props.deleteTask(task, day);
       props.onHide();
-    } else {
+    }
+
+    if(type === "add" || type === "update" ) {
       if(task.start === 24) {
         task.start = 0;
       }
@@ -22,21 +25,34 @@ function TaskModal(props) {
         task.end = 24;
       }
       if(task.start >= task.end) {
-        setError({modalShow: true, message: "End time must be after start time"});
+        setError({modalShow: true, message: "End time must be after start time", conflict: false});
       } else {
-        if(props.type === "update") {
-          props.updateTask(task, day);
-          props.onHide();
-        } else {
-          if(conflictChecker(props.weekData, day, task)) {
-            setError({modalShow: true, message: "Tasks cannot overlap"});
+        //if start and time are good, check for conflicting tasks
+        const overlappingTasks= conflictChecker(props.weekData, day, task);
+        if(overlappingTasks.length > 0) {
+            setError({modalShow: true,
+              message: "Tasks cannot overlap. Click 'Overwrite' to replace existing task(s).",
+              conflict: true,
+              newTask: task,
+              overlappingTasks: overlappingTasks});
           } else {
-            props.addTask(task, day);
-            props.onHide();
+            //if no conflicting tasks, update or add accordingly
+            if(props.type === "update") {
+              props.updateTask(task, day);
+              props.onHide();
+            } else {
+              props.addTask(task, day);
+              props.onHide();
           }
         }
       }
     }
+  };
+
+  const confirmOverwrite = (newTask, removeTask, day) => {
+    props.overwriteTask(newTask, removeTask, day);
+    setError({...error, modalShow: false})
+    props.onHide();
   };
 
   return (
@@ -57,7 +73,7 @@ function TaskModal(props) {
         <TaskForm task={props.task} type={props.type} day={props.day} time={props.hour} validateForm={validateForm}/>
       </Modal.Body>
     </Modal>
-    <ErrorModal {...error} onHide={() => setError({...error, modalShow: false})}/>
+    <ErrorModal {...error} day={props.day} validateForm={validateForm} confirmOverwrite={confirmOverwrite} onHide={() => setError({...error, modalShow: false})}/>
     </div>
   );
 }

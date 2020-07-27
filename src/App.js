@@ -28,7 +28,10 @@ function App() {
     3: calendar3
   });
 
-  const weekData = calendars[selectedDriver][week]
+  const weekData = () => {
+    const clonedCalendars = cloneDeep(calendars);
+    return clonedCalendars[selectedDriver][week];
+  }
 
   //events
   const driverChanged = (event) => {
@@ -70,7 +73,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-      <CalendarView days={days} time={time} weekData={weekData} addTask={addTask}/>
+      <CalendarView days={days} time={time} weekData={weekData()} addTask={addTask} updateTask={updateTask}/>
     </div>
   );
 }

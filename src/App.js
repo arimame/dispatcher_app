@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import cloneDeep from 'lodash/cloneDeep';
 
 import createEmptyCalendar from './helpers/emptyCalendar.js';
 
@@ -45,13 +46,14 @@ function App() {
   };
 
   const addTask = (task, day) => {
+    //clone calendar object
+    const allCalendars = cloneDeep(calendars);
     //updated tasks array
-    const tasks = calendars[selectedDriver][week][day].tasks;
-    tasks.push(task);
-
+    const tasks = allCalendars[selectedDriver][week][day].tasks;
+    const updatedTasks = [ ...tasks, task];
     //copy selected calendar object and update state
-    const updatedCalendar = calendars[selectedDriver];
-    updatedCalendar[week][day].tasks = tasks;
+    const updatedCalendar = allCalendars[selectedDriver];
+    updatedCalendar[week][day].tasks = updatedTasks;
     setCalendars({...calendars, [selectedDriver]: updatedCalendar})
   };
 

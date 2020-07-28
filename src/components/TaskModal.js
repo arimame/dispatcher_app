@@ -48,7 +48,6 @@ function TaskModal(props) {
   };
 
   const confirmOverwrite = (newTask, removeTask, day, type) => {
-    debugger;
     props.overwriteTask(newTask, removeTask, day, type);
     setError({...error, modalShow: false})
     props.onHide();

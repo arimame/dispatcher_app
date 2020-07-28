@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Task from './Task.js';
 import TaskModal from './TaskModal.js';
 
-const days = {
+const daysIndex = {
   1: "Sunday",
   2: "Monday",
   3: "Tuesday",
@@ -15,6 +15,9 @@ const days = {
   6: "Friday",
   7: "Saturday"
 }
+
+const days = ["1", "2", "3", "4", "5", "6", "7"];
+const time = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
 
 function CalendarView(props) {
   const [formProps, setFormProps] = React.useState({
@@ -52,17 +55,17 @@ function CalendarView(props) {
         <Row className="Days-header">
           <Col>
           </Col>
-          {props.days.map(day => (
-            <Col key={day}>{days[day]}</Col>
+          {days.map(day => (
+            <Col key={day}>{daysIndex[day]}</Col>
           ))}
         </Row>
-        {props.time.map(hour => (
+        {time.map(hour => (
           <Row className="Grid-row" key={hour}>
             <Col className="Time-col" key={hour}>{moment(hour,'HH').format('hh:mm a')}</Col>
-            {props.days.map(day => (
+            {days.map(day => (
               <Col className="Grid-col" key={day} onClick={() =>launchAddTaskModal(day, hour)}>
               {props.weekData[day].tasks.map(task =>
-                task.start === hour ? (<Task key={task} task={task} day={day} launchEditTaskModal={launchEditTaskModal} />) : (null))}
+                task.start === hour ? (<Task key={task.id} task={task} day={day} launchEditTaskModal={launchEditTaskModal} />) : (null))}
               </Col>
             ))}
           </Row>

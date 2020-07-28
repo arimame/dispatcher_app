@@ -25,7 +25,7 @@ function Task(props) {
  }
 
   return (
-    <div style={taskStyle(props.task)} onClick={(event) => props.launchEditTaskModal(event, props.task)}>
+    <div style={taskStyle(props.task)} onClick={(event) => props.launchEditTaskModal(event, props.task, props.day)}>
       <p>{props.task.type}</p>
     </div>
   );

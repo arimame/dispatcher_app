@@ -35,11 +35,12 @@ function CalendarView(props) {
     });
   };
 
-  const launchEditTaskModal = (event, task) => {
+  const launchEditTaskModal = (event, task, day) => {
     event.stopPropagation()
     setFormProps({
       ...formProps,
       modalShow: true,
+      day: day,
       task: task,
       type: "update"
     });
@@ -61,7 +62,7 @@ function CalendarView(props) {
             {props.days.map(day => (
               <Col className="Grid-col" key={day} onClick={() =>launchAddTaskModal(day, hour)}>
               {props.weekData[day].tasks.map(task =>
-                task.start === hour ? (<Task key={task} task={task} launchEditTaskModal={launchEditTaskModal} />) : (null))}
+                task.start === hour ? (<Task key={task} task={task} day={day} launchEditTaskModal={launchEditTaskModal} />) : (null))}
               </Col>
             ))}
           </Row>

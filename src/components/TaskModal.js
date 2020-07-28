@@ -36,19 +36,24 @@ function TaskModal(props) {
          });
        } else {
          //if no conflicting tasks, update or add accordingly
-          (props.type === "add") ? props.addTask(task, day) : props.updateTask(task, day);
+          props.taskRequest(type, task, day)
           props.onHide();
        }
      }
   };
 
   const confirmDelete = (task, day) => {
-    props.deleteTask(task, day);
+    props.taskRequest("delete", task, day)
     props.onHide();
   };
 
-  const confirmOverwrite = (newTask, removeTask, day, type) => {
-    props.overwriteTask(newTask, removeTask, day, type);
+  const confirmOverwrite = (newTask, tasksToRemove, day, type) => {
+    const taskData = {
+      type: type,
+      newTask: newTask,
+      tasksToRemove: tasksToRemove
+    }
+    props.taskRequest("overwrite", taskData, day)
     setError({...error, modalShow: false})
     props.onHide();
   };

@@ -104,12 +104,13 @@ function App() {
   return (
     <div className="App">
       <h1 className="Header">Dispatcher Scheduling App</h1>
+      <img style={{width: 400}} src="/logo.png" alt="logo"/>
       <Container className="Calendar-header">
         <Row>
           <Col className="Driver-container">
             <DriverSelector selectedDriver={selectedDriver} driverChanged={driverChanged}/>
           </Col>
-          <Col md="auto">
+          <Col lg="auto">
             <WeekSelector week={week} firstWeek={firstWeek} backWeek={backWeek} forwardWeek={forwardWeek} lastWeek={lastWeek}/>
           </Col>
           <Col className="Csv-container">

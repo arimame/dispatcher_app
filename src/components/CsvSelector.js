@@ -7,7 +7,7 @@ import { CSVLink} from "react-csv";
 function CsvSelector(props) {
 
   return (
-    <div>
+    <div className="Csv-container">
       <Select labelId="label" id="select" value={props.selectedReport} onChange={props.reportChanged}>
         <MenuItem value="2">2 Days</MenuItem>
         <MenuItem value="4">4 Days</MenuItem>
@@ -16,7 +16,7 @@ function CsvSelector(props) {
         <MenuItem value="28">28 Days</MenuItem>
       </Select>
        <CSVLink style={{marginLeft:10}} filename={"Driver-Report.csv"} data={props.csvGenerator()}>
-          <Button variant="success">Download Schedule</Button>
+          <Button variant="custom" size="m">Download</Button>
        </CSVLink>
     </div>
   );

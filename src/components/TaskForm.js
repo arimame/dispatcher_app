@@ -78,11 +78,11 @@ function TaskForm(props) {
           <Form.Control type="description" value={taskInputs.description} onChange={(event) => setTaskInputs({...taskInputs, description: event.target.value})}/>
         </Form.Group>
         {props.type === "add" ? (
-          <Button variant="primary" onClick={() => props.validateForm(taskInputs, props.day, props.type)}>Add Task</Button>
+          <Button variant="custom" onClick={() => props.validateForm(taskInputs, props.day, props.type)}>Add Task</Button>
           ) : (
           <div>
-            <Button variant="primary" onClick={() => props.validateForm(taskInputs, props.day, props.type)}>Update</Button>
-            <Button variant="danger" style={{marginLeft: 5}} onClick={() => props.confirmDelete(taskInputs, props.day)}>Delete</Button>
+            <Button variant="custom" onClick={() => props.validateForm(taskInputs, props.day, props.type)}>Update</Button>
+            <Button variant="outline-danger" style={{marginLeft: 5}} onClick={() => props.confirmDelete(taskInputs, props.day)}>Delete</Button>
           </div>
         )}
       </Form>

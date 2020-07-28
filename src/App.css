@@ -18,6 +18,10 @@
   justify-content: flex-end;
 }
 
+.btn-custom {
+  background-color: #EACBD2!important;
+}
+
 .Calendar-header p {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -31,6 +35,7 @@
   padding: 5px;
   background-color: black;
   color: white;
+  border-radius: 5px 5px 0 0 ;
 }
 
 .Grid-row {

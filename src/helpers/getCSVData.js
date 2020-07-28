@@ -75,19 +75,20 @@ function getCSVData(calendar, report) {
     case "2":
       data.push(["Timeframe", "Pickup", "Dropoff", "Other"]);
       dailyData = getDataByDay(calendar);
-      for(let i = 1; i < dailyData.length; i++) {
+      for(let day = 1; day < dailyData.length; day++) {
         let bidailyData  = [];
         //create a new array for every dayCount divisible by 2
-        //each array includes selected day and 1 days prior (total 2 days)
-        if (dailyData[i][0] % 2 === 0) {
-          //push added day count
-          bidailyData.push("Day " + dailyData[i - 1][0] + " - " + dailyData[i][0]);
-          //push added pickup
-          bidailyData.push(dailyData[i - 1][1] + dailyData[i][1]);
-          //push added dropoff
-          bidailyData.push(dailyData[i - 1][2] + dailyData[i][2]);
-          //push added other
-          bidailyData.push(dailyData[i - 1][3] + dailyData[i][3]);
+        //each array includes selected day and 1 day prior (total 2 days)
+        if (dailyData[day][0] % 2 === 0) {
+          for(let dataItem = 0; dataItem < dailyData[day].length; dataItem++) {
+            if(dataItem === 0) {
+              //append dayCount
+              bidailyData.push("Day " + dailyData[day - 1][dataItem] + " - " + dailyData[day][dataItem]);
+            } else {
+              // add together all other dataItems
+              bidailyData.push(dailyData[day - 1][dataItem] + dailyData[day][dataItem]);
+            }
+          }
           data.push(bidailyData);
         }
       }
@@ -95,19 +96,19 @@ function getCSVData(calendar, report) {
     case "4":
       data.push(["Timeframe", "Pickup", "Dropoff", "Other"]);
       dailyData = getDataByDay(calendar);
-      for(let i = 1; i < dailyData.length; i++) {
+      for(let day = 1; day < dailyData.length; day++) {
         let fourDayData  = [];
         //create a new array for every dayCount divisible by 4
         //each array includes selected day and 3 days prior (total 4 days)
-        if (dailyData[i][0] % 4 === 0) {
+        if (dailyData[day][0] % 4 === 0) {
           //push added day count
-          fourDayData.push("Day " + dailyData[i - 3][0] + " - " + dailyData[i][0]);
-          //push added pickup
-          fourDayData.push(dailyData[i - 3][1] + dailyData[i - 2][1] + dailyData[i - 1][1] + dailyData[i][1]);
-          //push added dropoff
-          fourDayData.push(dailyData[i - 3][2] + dailyData[i - 2][2] + dailyData[i - 1][2] + dailyData[i][2]);
-          //push added other
-          fourDayData.push(dailyData[i - 3][3] + dailyData[i - 2][3] + dailyData[i - 1][3] + dailyData[i][3]);
+            for(let dataItem = 0; dataItem < dailyData[day].length; dataItem++) {
+              if(dataItem === 0) {
+                fourDayData.push("Day " + dailyData[day - 3][dataItem] + " - " + dailyData[day][dataItem]);
+              } else {
+                fourDayData.push(dailyData[day - 3][dataItem] + dailyData[day - 2][dataItem] + dailyData[day - 1][dataItem] + dailyData[day][dataItem]);
+              }
+            }
           data.push(fourDayData);
         }
       }
@@ -119,19 +120,18 @@ function getCSVData(calendar, report) {
     case "14":
       data.push(["Timeframe", "Pickup", "Dropoff", "Other"]);
       weeklyData = getDataByWeek(calendar, report);
-      for(let i = 1; i < weeklyData.length; i++) {
+      for(let week = 1; week < weeklyData.length; week++) {
         let biweeklyData = [];
         //create a new array for every weekCount divisible by 2
         //each array includes selected week and 1 week prior (total 2 weeks)
-        if (weeklyData[i][0] % 2 === 0) {
-          //push added week count
-          biweeklyData.push("Week " + weeklyData[i - 1][0] + " - " + weeklyData[i][0]);
-          //push added pickup
-          biweeklyData.push(weeklyData[i - 1][1] + weeklyData[i][1]);
-          //push added dropoff
-          biweeklyData.push(weeklyData[i - 1][2] + weeklyData[i][2]);
-          //push added other
-          biweeklyData.push(weeklyData[i - 1][3] + weeklyData[i][3]);
+        if (weeklyData[week][0] % 2 === 0) {
+          for(let dataItem = 0; dataItem < weeklyData[week].length; dataItem++) {
+            if(dataItem === 0) {
+              biweeklyData.push("Week " + weeklyData[week - 1][dataItem] + " - " + weeklyData[week][dataItem]);
+            } else {
+              biweeklyData.push(weeklyData[week - 1][dataItem] + weeklyData[week][dataItem]);
+            }
+          }
           data.push(biweeklyData);
         }
       }
@@ -139,19 +139,18 @@ function getCSVData(calendar, report) {
     case "28":
       data.push(["Timeframe", "Pickup", "Dropoff", "Other"]);
       weeklyData = getDataByWeek(calendar, report);
-      for(let i = 1; i < weeklyData.length; i++) {
+      for(let week = 1; week < weeklyData.length; week++) {
         let monthlyData = [];
         //create a new array for every weekCount divisible by 4
         //each array includes selected week and 3 week prior (total 4 weeks)
-        if (weeklyData[i][0] % 4 === 0) {
-          //push added week count
-          monthlyData.push("Week " + weeklyData[i - 3][0] + " - " + weeklyData[i][0]);
-          //push added pickup
-          monthlyData.push(weeklyData[i - 3][1] + weeklyData[i - 2][1] + weeklyData[i - 1][1] + weeklyData[i][1]);
-          //push added dropoff
-          monthlyData.push(weeklyData[i - 3][2] + weeklyData[i - 2][2] + weeklyData[i - 1][2] + weeklyData[i][2]);
-          //push added other
-          monthlyData.push(weeklyData[i - 3][3] + weeklyData[i - 2][3] + weeklyData[i - 1][3] + weeklyData[i][3]);
+        if(weeklyData[week][0] % 4 === 0) {
+          for(let dataItem = 0; dataItem < weeklyData[week].length; dataItem++) {
+            if(dataItem === 0) {
+              monthlyData.push("Week " + weeklyData[week - 3][dataItem] + " - " + weeklyData[week][dataItem]);
+            } else {
+              monthlyData.push(weeklyData[week - 3][dataItem] + weeklyData[week - 2][dataItem] + weeklyData[week - 1][dataItem] + weeklyData[week][dataItem]);
+            }
+          }
           data.push(monthlyData);
         }
       }

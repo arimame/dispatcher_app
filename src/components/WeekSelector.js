@@ -1,7 +1,9 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import LastPageIcon from '@material-ui/icons/LastPage';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -13,17 +15,27 @@ function WeekSelector(props) {
       <Container>
         <Row>
           <Col>
-            <IconButton aria-label="back" onClick={props.backWeek} disabled={props.week <= 1}>
-              <ArrowBackIcon />
+            <IconButton aria-label="back" onClick={props.firstWeek} disabled={props.week <= 1}>
+              <FirstPageIcon  />
             </IconButton>
           </Col>
-          <Col xs={6}>
+          <Col>
+            <IconButton aria-label="back" onClick={props.backWeek} disabled={props.week <= 1}>
+              <NavigateBeforeIcon />
+            </IconButton>
+          </Col>
+          <Col xs={4}>
             <p>Week {props.week}</p>
           </Col>
           <Col>
             <IconButton aria-label="forward" onClick={props.forwardWeek} disabled={props.week >= 52} >
-              <ArrowForwardIcon />
-              </IconButton>
+              <NavigateNextIcon />
+            </IconButton>
+          </Col>
+          <Col>
+            <IconButton aria-label="forward" onClick={props.lastWeek} disabled={props.week >= 52} >
+              <LastPageIcon />
+            </IconButton>
           </Col>
         </Row>
       </Container>

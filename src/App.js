@@ -39,6 +39,11 @@ function App() {
     setSelectedDriver(event.target.value);
   };
 
+  const firstWeek = () => {
+    let back = 1;
+    setWeek(back);
+  };
+
   const backWeek = () => {
     let back = week - 1;
     setWeek(back);
@@ -46,6 +51,11 @@ function App() {
 
   const forwardWeek = () => {
     let forward = week + 1;
+    setWeek(forward);
+  };
+
+  const lastWeek = () => {
+    let forward = 52;
     setWeek(forward);
   };
 
@@ -99,8 +109,8 @@ function App() {
           <Col className="Driver-container">
             <DriverSelector selectedDriver={selectedDriver} driverChanged={driverChanged}/>
           </Col>
-          <Col>
-            <WeekSelector week={week} backWeek={backWeek} forwardWeek={forwardWeek}/>
+          <Col md="auto">
+            <WeekSelector week={week} firstWeek={firstWeek} backWeek={backWeek} forwardWeek={forwardWeek} lastWeek={lastWeek}/>
           </Col>
           <Col className="Csv-container">
             <CsvSelector selectedReport={selectedReport} reportChanged={reportChanged} csvGenerator={csvGenerator}/>

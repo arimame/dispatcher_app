@@ -1,7 +1,7 @@
 
 function createEmptyCalendar() {
   const emptyCalendarObject = {};
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const days = ["1", "2", "3", "4", "5", "6", "7"];
 
   for(let week = 1; week <= 52; week++) {
     emptyCalendarObject[week] = {};

@@ -6,6 +6,16 @@ import Col from 'react-bootstrap/Col'
 import Task from './Task.js';
 import TaskModal from './TaskModal.js';
 
+const days = {
+  1: "Sunday",
+  2: "Monday",
+  3: "Tuesday",
+  4: "Wednesday",
+  5: "Thursday",
+  6: "Friday",
+  7: "Saturday"
+}
+
 function CalendarView(props) {
   const [formProps, setFormProps] = React.useState({
     modalShow: false,
@@ -42,7 +52,7 @@ function CalendarView(props) {
           <Col>
           </Col>
           {props.days.map(day => (
-            <Col key={day}>{day}</Col>
+            <Col key={day}>{days[day]}</Col>
           ))}
         </Row>
         {props.time.map(hour => (

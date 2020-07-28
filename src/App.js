@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import DriverSelector from './components/DriverSelector.js';
 import WeekSelector from './components/WeekSelector.js';
+import CsvSelector from './components/CsvSelector.js';
 import CalendarView from './components/CalendarView.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
@@ -10,17 +11,19 @@ import Col from 'react-bootstrap/Col'
 import cloneDeep from 'lodash/cloneDeep';
 
 import createEmptyCalendar from './helpers/emptyCalendar.js';
+import getCSVData from './helpers/getCSVData.js';
 
 //initalize empty calendar objects
 const calendar1 = createEmptyCalendar();
 const calendar2 = createEmptyCalendar();
 const calendar3 = createEmptyCalendar();
 
-const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const days = ["1", "2", "3", "4", "5", "6", "7"];
 const time = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
 
 function App() {
   const [selectedDriver, setSelectedDriver] = React.useState("1");
+  const [selectedReport, setSelectedReport] = React.useState("2");
   const [week, setWeek] = React.useState(1);
   const [calendars, setCalendars] = React.useState({
     1: calendar1,
@@ -41,6 +44,10 @@ function App() {
   const backWeek = () => {
     let back = week - 1;
     setWeek(back);
+  };
+
+  const reportChanged = (event) => {
+    setSelectedReport(event.target.value);
   };
 
   const forwardWeek = () => {
@@ -125,7 +132,12 @@ function App() {
     setCalendars({...calendars, [selectedDriver]: updatedCalendar})
   };
 
-
+  const csvGenerator = () => {
+    const allCalendars = cloneDeep(calendars);
+    const selectedCalendar = allCalendars[selectedDriver];
+    const data  = getCSVData(selectedCalendar, selectedReport)
+    return data
+  }
 
   return (
     <div className="App">
@@ -137,6 +149,9 @@ function App() {
           </Col>
           <Col>
             <WeekSelector week={week} backWeek={backWeek} forwardWeek={forwardWeek}/>
+          </Col>
+          <Col className="Csv-container">
+            <CsvSelector selectedReport={selectedReport} reportChanged={reportChanged} csvGenerator={csvGenerator}/>
           </Col>
         </Row>
       </Container>

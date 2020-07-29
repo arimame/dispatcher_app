@@ -32,7 +32,7 @@ function App() {
   const weekData = () => {
     const clonedCalendars = cloneDeep(calendars);
     return clonedCalendars[selectedDriver][week];
-  }
+  };
 
   //events
   const driverChanged = (event) => {

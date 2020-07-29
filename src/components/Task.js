@@ -9,7 +9,7 @@ function Task(props) {
   };
 
   const taskStyle = function(task) {
-    const color = colors[task.type]
+    const color = colors[task.type];
     const height = (task.end - task.start) * 60;
     return {
       backgroundColor: color,

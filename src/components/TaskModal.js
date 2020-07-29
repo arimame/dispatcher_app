@@ -36,14 +36,14 @@ function TaskModal(props) {
          });
        } else {
          //if no conflicting tasks, update or add accordingly
-          props.taskRequest(type, task, day)
+          props.taskRequest(type, task, day);
           props.onHide();
        }
      }
   };
 
   const confirmDelete = (task, day) => {
-    props.taskRequest("delete", task, day)
+    props.taskRequest("delete", task, day);
     props.onHide();
   };
 
@@ -53,8 +53,8 @@ function TaskModal(props) {
       newTask: newTask,
       tasksToRemove: tasksToRemove
     }
-    props.taskRequest("overwrite", taskData, day)
-    setError({...error, modalShow: false})
+    props.taskRequest("overwrite", taskData, day);
+    setError({...error, modalShow: false});
     props.onHide();
   };
 

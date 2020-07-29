@@ -56,7 +56,7 @@ function CalendarView(props) {
           <Col>
           </Col>
           {days.map(day => (
-            <Col key={day}>{daysIndex[day]}</Col>
+            <Col className="Day-label" key={day}>{daysIndex[day]}</Col>
           ))}
         </Row>
         {time.map(hour => (

@@ -38,6 +38,12 @@
   border-radius: 5px 5px 0 0 ;
 }
 
+.Day-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .Grid-row {
   border-top: 1px solid black;
 }
@@ -57,4 +63,13 @@
 
 .Grid-col:hover {
   background-color: #F5F5F5;
+}
+
+@media (max-width: 990px) {
+  .Driver-container  {
+    display: block;
+  }
+  .Csv-container {
+    display: block;
+  }
 }

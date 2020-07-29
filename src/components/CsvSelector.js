@@ -16,7 +16,7 @@ function CsvSelector(props) {
         <MenuItem value="28">28 Days</MenuItem>
       </Select>
        <CSVLink style={{marginLeft:10}} filename={"Driver-Report.csv"} data={props.csvGenerator()}>
-          <Button variant="custom" size="m">Download</Button>
+          <Button variant="custom" size="m">Download CSV</Button>
        </CSVLink>
     </div>
   );

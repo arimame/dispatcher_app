@@ -1,12 +1,16 @@
 # Dispatcher Scheduling App
 
+Do you have a fleet of drivers whose time needs to be carefully managed in order to maintain productivity? Do you ever ask yourself questions like, "am I equitably distributing the tasks I have"?
+
+If so, this simple scheduling app is for you. Not only can you make and delete appointments, keeping track of a full year of data one week at a time, but you can also view that data in easy-to-compare pieces and export all of your drivers' data into Excel friendly file formats for easy implementation elsewhere in your busy business.
+
 ## Features
-- View a weekly calendar for 3 different drivers
-- Create tasks for a specific driver
-- Edit existing tasks and update the task type, time, location, and description
-- Overwrite old tasks with a conflicting task
-- Delete tasks
-- Download a CSV file outlining a specific driver's tasks for a chosen time frame
+- Users can view a weekly calendar for 3 different drivers.
+- Users can create new tasks for a specified driver.
+- Users can edit existing tasks and update task types, times, locations, and descriptions.
+- Users can automatically overwrite an old task with a new task, if there is a time conflict.
+- Users can delete tasks.
+- Users can download CSV files outlining a specified driver's tasks for a chosen time frame.
 
 ## Getting Started
 
